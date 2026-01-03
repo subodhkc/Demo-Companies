@@ -1,0 +1,117 @@
+[2025-01-01T02:15:32.451Z] INFO  Pipeline started
+[2025-01-01T02:15:32.452Z] INFO  Trigger: push to main
+[2025-01-01T02:15:32.453Z] INFO  Commit: a1b2c3d4e5f6789012345678901234567890abcd
+[2025-01-01T02:15:32.454Z] INFO  Author: david.kim@securecloud.io
+[2025-01-01T02:15:32.455Z] INFO  Message: feat: Add enhanced audit logging for SOC 2 compliance
+
+[2025-01-01T02:15:33.001Z] INFO  === JOB: lint ===
+[2025-01-01T02:15:33.002Z] INFO  Step: Checkout code
+[2025-01-01T02:15:35.123Z] INFO  Step: Setup Node.js 20
+[2025-01-01T02:15:42.456Z] INFO  Step: Install dependencies
+[2025-01-01T02:15:58.789Z] INFO  Step: Run ESLint
+[2025-01-01T02:16:12.234Z] INFO  ESLint: 0 errors, 0 warnings
+[2025-01-01T02:16:12.567Z] INFO  Step: Run Prettier check
+[2025-01-01T02:16:18.890Z] INFO  Prettier: All files formatted correctly
+[2025-01-01T02:16:19.123Z] INFO  Step: TypeScript type check
+[2025-01-01T02:16:45.456Z] INFO  TypeScript: No errors found
+[2025-01-01T02:16:45.789Z] INFO  JOB lint: SUCCESS (72.34s)
+
+[2025-01-01T02:16:46.001Z] INFO  === JOB: test ===
+[2025-01-01T02:16:46.002Z] INFO  Starting PostgreSQL service
+[2025-01-01T02:16:52.345Z] INFO  PostgreSQL ready on port 5432
+[2025-01-01T02:16:52.678Z] INFO  Starting Redis service
+[2025-01-01T02:16:55.901Z] INFO  Redis ready on port 6379
+[2025-01-01T02:16:56.234Z] INFO  Step: Install dependencies
+[2025-01-01T02:17:12.567Z] INFO  Step: Run database migrations
+[2025-01-01T02:17:18.890Z] INFO  Migration 001_initial_schema: applied
+[2025-01-01T02:17:19.123Z] INFO  Migration 002_audit_logs: applied
+[2025-01-01T02:17:19.456Z] INFO  Migration 003_encryption_keys: applied
+[2025-01-01T02:17:19.789Z] INFO  Step: Run unit tests
+[2025-01-01T02:18:45.012Z] INFO  Test Suites: 47 passed, 47 total
+[2025-01-01T02:18:45.345Z] INFO  Tests: 312 passed, 312 total
+[2025-01-01T02:18:45.678Z] INFO  Coverage: 94.2% statements, 91.8% branches, 96.1% functions, 93.7% lines
+[2025-01-01T02:18:46.001Z] INFO  Step: Upload coverage report
+[2025-01-01T02:18:52.234Z] INFO  Coverage uploaded to Codecov
+[2025-01-01T02:18:52.567Z] INFO  JOB test: SUCCESS (126.57s)
+
+[2025-01-01T02:18:53.001Z] INFO  === JOB: security ===
+[2025-01-01T02:18:53.002Z] INFO  Step: Run npm audit
+[2025-01-01T02:19:05.345Z] INFO  npm audit: 0 vulnerabilities found
+[2025-01-01T02:19:05.678Z] INFO  Step: Run Snyk security scan
+[2025-01-01T02:19:32.901Z] INFO  Snyk: No high or critical vulnerabilities
+[2025-01-01T02:19:33.234Z] INFO  Step: Run Semgrep SAST
+[2025-01-01T02:20:15.567Z] INFO  Semgrep: 0 findings
+[2025-01-01T02:20:15.890Z] INFO  Step: Run Gitleaks secrets scan
+[2025-01-01T02:20:28.123Z] INFO  Gitleaks: No secrets detected
+[2025-01-01T02:20:28.456Z] INFO  JOB security: SUCCESS (95.46s)
+
+[2025-01-01T02:20:29.001Z] INFO  === JOB: build ===
+[2025-01-01T02:20:29.002Z] INFO  Step: Install dependencies
+[2025-01-01T02:20:45.345Z] INFO  Step: Build application
+[2025-01-01T02:21:32.678Z] INFO  Backend build: SUCCESS
+[2025-01-01T02:22:18.901Z] INFO  Frontend build: SUCCESS
+[2025-01-01T02:22:19.234Z] INFO  Step: Upload build artifacts
+[2025-01-01T02:22:28.567Z] INFO  Artifacts uploaded (12.4 MB)
+[2025-01-01T02:22:28.890Z] INFO  JOB build: SUCCESS (119.89s)
+
+[2025-01-01T02:22:29.001Z] INFO  === JOB: container ===
+[2025-01-01T02:22:29.002Z] INFO  Step: Set up Docker Buildx
+[2025-01-01T02:22:35.345Z] INFO  Step: Login to Container Registry
+[2025-01-01T02:22:38.678Z] INFO  Logged in to ghcr.io
+[2025-01-01T02:22:38.901Z] INFO  Step: Build and push
+[2025-01-01T02:24:52.234Z] INFO  Image built: ghcr.io/securecloud/platform:a1b2c3d
+[2025-01-01T02:25:18.567Z] INFO  Image pushed to registry
+[2025-01-01T02:25:18.890Z] INFO  Step: Run Trivy vulnerability scan
+[2025-01-01T02:25:45.123Z] INFO  Trivy: 0 CRITICAL, 0 HIGH vulnerabilities
+[2025-01-01T02:25:45.456Z] INFO  JOB container: SUCCESS (196.46s)
+
+[2025-01-01T02:25:46.001Z] INFO  === JOB: deploy-staging ===
+[2025-01-01T02:25:46.002Z] INFO  Environment: staging
+[2025-01-01T02:25:46.003Z] INFO  Approval: automatic (staging)
+[2025-01-01T02:25:48.345Z] INFO  Step: Configure AWS credentials
+[2025-01-01T02:25:52.678Z] INFO  Step: Deploy to EKS Staging
+[2025-01-01T02:25:55.901Z] INFO  Updating kubeconfig for securecloud-staging
+[2025-01-01T02:26:02.234Z] INFO  Setting image: ghcr.io/securecloud/platform:a1b2c3d
+[2025-01-01T02:26:45.567Z] INFO  Rollout status: 3/3 replicas ready
+[2025-01-01T02:26:45.890Z] INFO  Step: Run smoke tests
+[2025-01-01T02:26:48.123Z] INFO  Health check: https://staging.securecloud.io/health - 200 OK
+[2025-01-01T02:26:48.456Z] INFO  Step: Notify deployment
+[2025-01-01T02:26:50.789Z] INFO  Slack notification sent to #deployments
+[2025-01-01T02:26:51.012Z] INFO  JOB deploy-staging: SUCCESS (65.01s)
+
+[2025-01-01T02:26:52.001Z] INFO  === JOB: deploy-production ===
+[2025-01-01T02:26:52.002Z] INFO  Environment: production
+[2025-01-01T02:26:52.003Z] INFO  Waiting for approval...
+[2025-01-01T02:35:18.345Z] INFO  Approval received from: james.smith@securecloud.io (CISO)
+[2025-01-01T02:35:18.678Z] INFO  Approval comment: Reviewed changes, security scan passed, approved for production
+[2025-01-01T02:35:20.901Z] INFO  Step: Configure AWS credentials
+[2025-01-01T02:35:24.234Z] INFO  Step: Deploy to EKS Production
+[2025-01-01T02:35:27.567Z] INFO  Updating kubeconfig for securecloud-production
+[2025-01-01T02:35:34.890Z] INFO  Setting image: ghcr.io/securecloud/platform:a1b2c3d
+[2025-01-01T02:36:28.123Z] INFO  Rollout status: 6/6 replicas ready
+[2025-01-01T02:36:28.456Z] INFO  Step: Run health checks
+[2025-01-01T02:36:31.789Z] INFO  Health check: https://api.securecloud.io/health - 200 OK
+[2025-01-01T02:36:32.012Z] INFO  Step: Create deployment record
+[2025-01-01T02:36:32.345Z] INFO  Deployment ID: deploy-2025-01-01-a1b2c3d
+[2025-01-01T02:36:32.678Z] INFO  Step: Notify deployment
+[2025-01-01T02:36:34.901Z] INFO  Slack notification sent to #deployments
+[2025-01-01T02:36:35.234Z] INFO  JOB deploy-production: SUCCESS (583.23s)
+
+[2025-01-01T02:36:35.567Z] INFO  === PIPELINE SUMMARY ===
+[2025-01-01T02:36:35.568Z] INFO  Status: SUCCESS
+[2025-01-01T02:36:35.569Z] INFO  Total Duration: 21m 3s
+[2025-01-01T02:36:35.570Z] INFO  Jobs Completed: 7/7
+[2025-01-01T02:36:35.571Z] INFO  
+[2025-01-01T02:36:35.572Z] INFO  SOC 2 Compliance Checks:
+[2025-01-01T02:36:35.573Z] INFO  - CC8.1 Change Management: PASSED (code review required, tests passed)
+[2025-01-01T02:36:35.574Z] INFO  - CC7.1 Vulnerability Management: PASSED (0 critical/high vulnerabilities)
+[2025-01-01T02:36:35.575Z] INFO  - CC6.8 Malware Protection: PASSED (container scan clean)
+[2025-01-01T02:36:35.576Z] INFO  - CC6.7 Data Protection: PASSED (no secrets in code)
+[2025-01-01T02:36:35.577Z] INFO  
+[2025-01-01T02:36:35.578Z] INFO  Deployment Record:
+[2025-01-01T02:36:35.579Z] INFO  - Commit: a1b2c3d4e5f6789012345678901234567890abcd
+[2025-01-01T02:36:35.580Z] INFO  - Author: david.kim@securecloud.io
+[2025-01-01T02:36:35.581Z] INFO  - Approver: james.smith@securecloud.io
+[2025-01-01T02:36:35.582Z] INFO  - Staging Deploy: 2025-01-01T02:26:45Z
+[2025-01-01T02:36:35.583Z] INFO  - Production Deploy: 2025-01-01T02:36:28Z
+[2025-01-01T02:36:35.584Z] INFO  - Image: ghcr.io/securecloud/platform:a1b2c3d

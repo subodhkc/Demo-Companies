@@ -1,0 +1,38 @@
+[2025-01-01T00:00:15.123Z] INFO  event=auth_success user_id=usr_a1b2c3d4 email=admin@securecloud.io ip=10.0.1.45 method=password+mfa session_id=sess_x1y2z3
+[2025-01-01T00:05:32.456Z] INFO  event=data_access user_id=usr_a1b2c3d4 resource=users action=list count=25 tenant_id=ten_prod01
+[2025-01-01T00:12:18.789Z] INFO  event=auth_success user_id=usr_e5f6g7h8 email=developer@securecloud.io ip=10.0.2.78 method=sso+mfa session_id=sess_a2b3c4
+[2025-01-01T00:15:45.012Z] WARN  event=auth_failure ip=203.0.113.45 reason=invalid_password attempted_user=unknown@example.com
+[2025-01-01T00:15:46.345Z] WARN  event=auth_failure ip=203.0.113.45 reason=invalid_password attempted_user=admin@securecloud.io
+[2025-01-01T00:15:47.678Z] WARN  event=auth_failure ip=203.0.113.45 reason=invalid_password attempted_user=admin@securecloud.io
+[2025-01-01T00:15:48.901Z] WARN  event=rate_limit_exceeded ip=203.0.113.45 path=/api/v1/auth/login attempts=5
+[2025-01-01T00:15:49.234Z] INFO  event=ip_blocked ip=203.0.113.45 duration=30m reason=brute_force_attempt
+[2025-01-01T00:22:33.567Z] INFO  event=permission_granted user_id=usr_e5f6g7h8 permission=data:read resource=analytics
+[2025-01-01T00:35:12.890Z] INFO  event=session_refresh user_id=usr_a1b2c3d4 session_id=sess_x1y2z3 new_expiry=2025-01-01T01:35:12Z
+[2025-01-01T00:45:28.123Z] WARN  event=permission_denied user_id=usr_i9j0k1l2 permission=admin:write resource=settings reason=insufficient_role
+[2025-01-01T00:52:41.456Z] INFO  event=auth_success user_id=usr_m3n4o5p6 email=analyst@securecloud.io ip=10.0.3.92 method=sso+mfa session_id=sess_d5e6f7
+[2025-01-01T01:05:17.789Z] INFO  event=data_export user_id=usr_m3n4o5p6 resource=reports format=csv count=150 size_bytes=245678
+[2025-01-01T01:15:33.012Z] INFO  event=config_change user_id=usr_a1b2c3d4 setting=session_timeout old_value=900 new_value=1800 tenant_id=ten_prod01
+[2025-01-01T01:28:45.345Z] INFO  event=mfa_verified user_id=usr_q7r8s9t0 method=totp session_id=sess_g8h9i0
+[2025-01-01T01:35:12.678Z] INFO  event=session_expired user_id=usr_a1b2c3d4 session_id=sess_x1y2z3 reason=timeout
+[2025-01-01T01:42:28.901Z] INFO  event=auth_success user_id=usr_a1b2c3d4 email=admin@securecloud.io ip=10.0.1.45 method=refresh_token session_id=sess_j1k2l3
+[2025-01-01T02:05:33.234Z] INFO  event=api_key_created user_id=usr_a1b2c3d4 key_prefix=sk_prod_ scopes=["data:read","data:write"] expires_at=2025-04-01
+[2025-01-01T02:18:45.567Z] INFO  event=user_created user_id=usr_u1v2w3x4 email=newuser@securecloud.io created_by=usr_a1b2c3d4 roles=["viewer"]
+[2025-01-01T02:25:12.890Z] INFO  event=role_assigned user_id=usr_u1v2w3x4 role=analyst assigned_by=usr_a1b2c3d4
+[2025-01-01T02:35:28.123Z] INFO  event=password_changed user_id=usr_e5f6g7h8 method=self_service ip=10.0.2.78
+[2025-01-01T03:00:00.456Z] INFO  event=access_review_started reviewer=usr_a1b2c3d4 scope=all_users tenant_id=ten_prod01
+[2025-01-01T03:15:33.789Z] INFO  event=access_review_completed reviewer=usr_a1b2c3d4 users_reviewed=127 access_revoked=3 access_modified=8
+[2025-01-01T03:22:45.012Z] INFO  event=session_terminated user_id=usr_y5z6a7b8 session_id=sess_m4n5o6 reason=access_revoked terminated_by=usr_a1b2c3d4
+[2025-01-01T04:00:15.345Z] INFO  event=backup_started type=database initiated_by=system
+[2025-01-01T04:12:28.678Z] INFO  event=backup_completed type=database size_gb=45.2 duration_seconds=732 destination=s3://securecloud-backups/2025-01-01/
+[2025-01-01T04:15:33.901Z] INFO  event=backup_verified type=database checksum=sha256:a1b2c3d4e5f6... status=valid
+[2025-01-01T05:00:00.234Z] INFO  event=key_rotation_started key_type=data_encryption initiated_by=system
+[2025-01-01T05:02:45.567Z] INFO  event=key_rotation_completed key_type=data_encryption old_key_id=key_2024_12 new_key_id=key_2025_01 records_re_encrypted=15234
+[2025-01-01T06:00:15.890Z] INFO  event=vulnerability_scan_started scope=all_systems initiated_by=system
+[2025-01-01T06:45:28.123Z] INFO  event=vulnerability_scan_completed findings={"critical":0,"high":0,"medium":2,"low":5} duration_minutes=45
+[2025-01-01T07:00:00.456Z] INFO  event=certificate_check initiated_by=system certificates_checked=12 expiring_soon=1 expired=0
+[2025-01-01T07:00:15.789Z] WARN  event=certificate_expiring certificate=api.securecloud.io expires_at=2025-02-15 days_remaining=45
+[2025-01-01T08:00:33.012Z] INFO  event=auth_success user_id=usr_c8d9e0f1 email=support@securecloud.io ip=10.0.4.56 method=sso+mfa session_id=sess_p7q8r9
+[2025-01-01T08:15:45.345Z] INFO  event=data_access user_id=usr_c8d9e0f1 resource=customer_tickets action=list count=42 tenant_id=ten_prod01
+[2025-01-01T08:32:18.678Z] INFO  event=permission_granted user_id=usr_c8d9e0f1 permission=data:read resource=customer_data
+[2025-01-01T09:00:00.901Z] INFO  event=compliance_check initiated_by=system framework=soc2 controls_checked=47 controls_passing=47 controls_failing=0
+[2025-01-01T09:05:15.234Z] INFO  event=metrics_collected uptime_percent=99.99 mttd_minutes=4 mttr_minutes=12 active_sessions=45
