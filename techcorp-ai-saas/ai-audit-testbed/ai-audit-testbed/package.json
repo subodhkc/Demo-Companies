@@ -1,0 +1,12 @@
+{
+  "name": "ai-audit-testbed",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2",
+    "openai": "^4.30.0",
+    "node-fetch": "^3.3.2",
+    "dotenv": "^16.4.5"
+  }
+}
